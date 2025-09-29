@@ -1,33 +1,40 @@
-const base64UrlEncode = (buffer) => {
-    const bytes = new Uint8Array(buffer);
+const base64UrlEncode = (input) => {
+    const bytes = input instanceof Uint8Array ? input : new Uint8Array(input);
     let binary = '';
     bytes.forEach((byte) => {
         binary += String.fromCharCode(byte);
     });
-    return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    const base64 = typeof btoa === 'function'
+        ? btoa(binary)
+        : typeof Buffer !== 'undefined'
+            ? Buffer.from(binary, 'binary').toString('base64')
+            : (() => {
+                throw new Error('Base64 encoding is not supported in this environment.');
+            })();
+    return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 };
-const getRandomBytes = async (length) => {
-    if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
-        return crypto.getRandomValues(new Uint8Array(length));
+const getCrypto = async () => {
+    if (typeof globalThis.crypto !== 'undefined') {
+        return globalThis.crypto;
     }
-    const { randomBytes } = await import('crypto');
-    return randomBytes(length);
+    if (typeof globalThis.process !== 'undefined' && globalThis.process.versions?.node) {
+        const moduleId = 'node:crypto';
+        const nodeCrypto = (await import(/* @vite-ignore */ moduleId));
+        if (nodeCrypto.webcrypto) {
+            return nodeCrypto.webcrypto;
+        }
+    }
+    throw new Error('Web Crypto API is not available in the current environment.');
 };
 export const generateCodeVerifier = async (length = 64) => {
-    const randomBytes = await getRandomBytes(length);
-    const bytes = randomBytes instanceof Uint8Array
-        ? randomBytes
-        : new Uint8Array(randomBytes.buffer, randomBytes.byteOffset, randomBytes.byteLength);
-    return base64UrlEncode(bytes.buffer);
+    const crypto = await getCrypto();
+    const bytes = crypto.getRandomValues(new Uint8Array(length));
+    return base64UrlEncode(bytes);
 };
 export const generateCodeChallenge = async (verifier) => {
     const encoder = new TextEncoder();
     const data = encoder.encode(verifier);
-    if (typeof crypto !== 'undefined' && crypto.subtle) {
-        const digest = await crypto.subtle.digest('SHA-256', data);
-        return base64UrlEncode(digest);
-    }
-    const { createHash } = await import('crypto');
-    const hash = createHash('sha256').update(verifier).digest();
-    return base64UrlEncode(hash.buffer);
+    const crypto = await getCrypto();
+    const digest = await crypto.subtle.digest('SHA-256', data);
+    return base64UrlEncode(digest);
 };

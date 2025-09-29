@@ -3,7 +3,7 @@ import type {
   ClassifiedCalendarEvent,
   FetchEventsResponse,
   OverlayEventRequest
-} from '../../shared/types/calendar.ts';
+} from '../../shared/types/calendar';
 
 const DEFAULT_HEADERS: HeadersInit = {
   'Content-Type': 'application/json'

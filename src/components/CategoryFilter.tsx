@@ -1,4 +1,4 @@
-import type { ClassificationCategory } from '../../shared/types/calendar.ts';
+import type { ClassificationCategory } from '../../shared/types/calendar';
 
 const LABELS: Record<'all' | ClassificationCategory, string> = {
   all: 'すべて',

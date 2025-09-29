@@ -12,7 +12,7 @@ const getRandomBytes = async (length: number) => {
     return crypto.getRandomValues(new Uint8Array(length));
   }
 
-  const { randomBytes } = await import('node:crypto');
+  const { randomBytes } = await import('crypto');
   return randomBytes(length);
 };
 
@@ -34,7 +34,7 @@ export const generateCodeChallenge = async (verifier: string): Promise<string> =
     return base64UrlEncode(digest);
   }
 
-  const { createHash } = await import('node:crypto');
+  const { createHash } = await import('crypto');
   const hash = createHash('sha256').update(verifier).digest();
   return base64UrlEncode(hash.buffer);
 };

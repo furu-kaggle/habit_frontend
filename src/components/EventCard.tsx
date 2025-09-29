@@ -1,5 +1,5 @@
-import type { ClassifiedCalendarEvent } from '../../shared/types/calendar.ts';
-import { formatEventDateLabel, formatEventTimeRange } from '../lib/time.ts';
+import type { ClassifiedCalendarEvent } from '../../shared/types/calendar';
+import { formatEventDateLabel, formatEventTimeRange } from '../lib/time';
 
 const CATEGORY_CLASS: Record<
   ClassifiedCalendarEvent['classification']['category'],

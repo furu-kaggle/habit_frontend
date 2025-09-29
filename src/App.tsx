@@ -1,20 +1,20 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { CategoryFilter } from './components/CategoryFilter.tsx';
-import { EventCard } from './components/EventCard.tsx';
+import { CategoryFilter } from './components/CategoryFilter';
+import { EventCard } from './components/EventCard';
 import {
   fetchClassifiedEvents,
   putOverlayEvent,
   quickAddMeal,
   removeOverlayEvent,
   triggerAutoPlan
-} from './lib/api.ts';
-import { createEventHash } from '../shared/utils/hash.ts';
-import { mockedEvents } from '../shared/mock/events.ts';
+} from './lib/api';
+import { createEventHash } from '../shared/utils/hash';
+import { mockedEvents } from '../shared/mock/events';
 import type {
   ClassifiedCalendarEvent,
   ClassificationCategory
-} from '../shared/types/calendar.ts';
+} from '../shared/types/calendar';
 
 import './styles/app.css';
 

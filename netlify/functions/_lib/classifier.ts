@@ -3,9 +3,9 @@ import OpenAI from 'openai';
 import type {
   CalendarEvent,
   ClassificationResult
-} from '../../shared/types/calendar.ts';
-import { classificationSchema } from '../../shared/schema/classification.ts';
-import { buildClassifierMessages } from '../../shared/utils/prompt.ts';
+} from '../../shared/types/calendar';
+import { classificationSchema } from '../../shared/schema/classification';
+import { buildClassifierMessages } from '../../shared/utils/prompt';
 
 const DEFAULT_MODEL = process.env.OPENAI_MODEL ?? 'gpt-4o-mini';
 

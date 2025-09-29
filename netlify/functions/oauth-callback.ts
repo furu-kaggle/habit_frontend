@@ -1,7 +1,7 @@
 import type { Handler } from '@netlify/functions';
 
-import { createRequestContext } from './_lib/request.ts';
-import { badRequest, jsonResponse, methodNotAllowed, ok } from './_lib/response.ts';
+import { createRequestContext } from './_lib/request';
+import { badRequest, jsonResponse, methodNotAllowed, ok } from './_lib/response';
 
 export const handler: Handler = async (event) => {
   const { requestId } = createRequestContext(event);

@@ -1,4 +1,4 @@
-import type { CalendarEvent, ClassifiedCalendarEvent } from '../../shared/types/calendar.ts';
+import type { CalendarEvent, ClassifiedCalendarEvent } from '../../shared/types/calendar';
 
 export interface CalendarListOptions {
   startIso: string;

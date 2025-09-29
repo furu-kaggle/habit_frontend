@@ -1,5 +1,5 @@
-import type { CalendarEvent } from '../types/calendar.ts';
-import { truncate } from './text.ts';
+import type { CalendarEvent } from '../types/calendar';
+import { truncate } from './text';
 
 export const MAX_DESCRIPTION_LENGTH = 512;
 

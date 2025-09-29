@@ -5,11 +5,11 @@ import {
   CALENDAR_LOOKAHEAD_DAYS,
   CALENDAR_LOOKBACK_DAYS,
   DEFAULT_TIMEZONE
-} from '../../shared/config/constants.ts';
-import { mockedEvents } from '../../shared/mock/events.ts';
-import type { FetchEventsResponse } from '../../shared/types/calendar.ts';
-import { createRequestContext } from './_lib/request.ts';
-import { jsonResponse, ok } from './_lib/response.ts';
+} from '../../shared/config/constants';
+import { mockedEvents } from '../../shared/mock/events';
+import type { FetchEventsResponse } from '../../shared/types/calendar';
+import { createRequestContext } from './_lib/request';
+import { jsonResponse, ok } from './_lib/response';
 
 export const handler: Handler = async (event) => {
   const { requestId } = createRequestContext(event);

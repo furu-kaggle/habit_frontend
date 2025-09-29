@@ -1,4 +1,4 @@
-import type { ClassifiedCalendarEvent } from '../../shared/types/calendar.ts';
+import type { ClassifiedCalendarEvent } from '../../shared/types/calendar';
 
 export const mockedEvents: ClassifiedCalendarEvent[] = [
   {

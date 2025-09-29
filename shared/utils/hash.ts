@@ -15,6 +15,6 @@ export const createEventHash = async (
       .join('');
   }
 
-  const { createHash } = await import('node:crypto');
+  const { createHash } = await import('crypto');
   return createHash('sha1').update(text).digest('hex');
 };
